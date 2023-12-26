@@ -21,9 +21,9 @@
             loading="eager"
             data-src="{{
               customer?.ProfilePicName ||
-                '/assets/images/avtar/placeholder-user.png'
+                '/assets/images/landingpage/wheels-logo-1.png'
             }}"
-            onerror="this.onerror=null;this.src='/assets/images/avtar/placeholder-user.png';"
+            onerror="this.onerror=null;this.src='/assets/images/landingpage/wheels-logo-1.png';"
             alt="Preview Image"
           />
           <div class="user-details ms-3">
@@ -60,7 +60,7 @@
               <a
                 class="nav-link d-center"
                 [ngClass]="activeTab === 2 ? 'active' : ''"
-                >Health Practitioner</a
+                >Car Deals</a
               >
             </li>
             <li
@@ -180,7 +180,7 @@
         </ng-container>
         <ng-template #noData>
           <div>
-            <h6 class="text-center">No Practitioner</h6>
+            <h6 class="text-center">No Sales</h6>
           </div>
         </ng-template>
       </ng-container>
@@ -195,9 +195,9 @@
                     loading="lazy"
                     data-src="{{
                       item?.ProfilePicName ||
-                        '/assets/images/avtar/placeholder-user.png'
+                        '/assets/images/landingpage/wheels-logo-1.png'
                     }}"
-                    onerror="this.onerror=null;this.src='/assets/images/avtar/placeholder-user.png';"
+                    onerror="this.onerror=null;this.src='/assets/images/landingpage/wheels-logo-1.png';"
                     alt="avatar"
                   />
                 </div>

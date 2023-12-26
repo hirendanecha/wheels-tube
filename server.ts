@@ -84,18 +84,18 @@ export function app(): express.Express {
         }
         const params = req.params[0];
         var seo: any = {
-          title: 'Healing Tube',
+          title: 'Wheels Tube',
           description:
-            'Private video consultations with Naturopathic Doctors and Holistic Healers from around the world. Social Discussion on how to heal various ailments.',
+            'Talk face-to-face with car sales people locally or worldwide and view cars before going to the car lot Receive car data via chat or by email',
           image:
             'https://www.healing.tube/assets/images/Healing-Tube-Logo.png',
           site: 'https://www.healing.tube/',
           url: 'https://www.healing.tube' + params,
-          keywords: 'HealingTube',
+          keywords: 'WheelsTube',
         };
         if (
           params.indexOf('communities/') > -1 ||
-          params.indexOf('pages/') > -1
+          params.indexOf('car-deals/') > -1
         ) {
           let id = params.split('/');
           id = id[id.length - 1];
@@ -161,7 +161,7 @@ export function app(): express.Express {
           seo.description = strip_html_tags(talent.description);
           seo.image = talent.image;
           // }
-        }else if (params.indexOf('research/') > -1) {
+        } else if (params.indexOf('research/') > -1) {
           let id = params.split('/');
           id = id[id.length - 1];
           console.log({ id });
@@ -170,7 +170,7 @@ export function app(): express.Express {
 
           console.log('group===>', group);
           const talent = {
-            name: `HealingTube Research ${group?.PageTitle}`,
+            name: `WheelsTube Research ${group?.PageTitle}`,
             description: group?.PageDescription,
             image: group?.CoverPicName || group?.ProfilePicName
           };

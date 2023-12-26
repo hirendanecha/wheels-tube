@@ -29,10 +29,10 @@ export class HealthPraatitionerCardComponent {
 
   goToCommunityDetailPage(): void {
     if (this.community.pageType === 'page') {
-      this.router.navigate(['pages', this.community?.slug]);
+      this.router.navigate(['car-deals', this.community?.slug]);
     } else {
       if (this.community?.isApprove === 'Y') {
-        this.router.navigate(['health-practitioner']);
+        this.router.navigate(['car-sales']);
       } else {
         this.toastService.danger('This community not approve yet.');
       }

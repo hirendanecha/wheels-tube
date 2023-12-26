@@ -11,7 +11,7 @@
           class="avatar-img max-un"
           loading="lazy"
           data-src="{{ sharedService?.userData?.ProfilePicName }}"
-          onerror="this.onerror=null;this.src='/assets/images/avtar/placeholder-user.png';"
+          onerror="this.onerror=null;this.src='/assets/images/landingpage/wheels-logo-1.png';"
           alt="avatar"
         />
       </div>
@@ -36,23 +36,23 @@
       <li class="ms-1">
         <a
           class="d-flex gap-4"
-          routerLink="/health-practitioner"
+          routerLink="/car-sales"
           routerLinkActive="active"
           (click)="closeSidebar()"
         >
-          <fa-icon [icon]="['fas', 'house-medical']" class="font-24-px" />
-          <span>Health Practitioner</span>
+          <fa-icon [icon]="['fas', 'shop']" class="font-24-px" />
+          <span>Car Sales People</span>
         </a>
       </li>
       <li class="ms-1">
         <a
           class="d-flex gap-4"
-          routerLink="/pages"
+          routerLink="/car-deals"
           routerLinkActive="active"
           (click)="closeSidebar()"
         >
-          <fa-icon [icon]="['fas', 'stethoscope']" class="font-24-px" />
-          <span>Healing Topics</span>
+          <fa-icon [icon]="['fas', 'money-bill']" class="font-24-px" />
+          <span>Car Deals</span>
         </a>
       </li>
       <li class="ms-1">

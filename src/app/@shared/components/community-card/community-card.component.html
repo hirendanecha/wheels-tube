@@ -19,7 +19,7 @@
         loading="lazy"
         class="w-80-px h-80-px rounded-3 shadow-none"
         data-src="{{ community?.logoImg }}"
-        onerror="this.onerror=null;this.src='/assets/images/avtar/placeholder-user.png';"
+        onerror="this.onerror=null;this.src='/assets/images/landingpage/wheels-logo-1.png';"
         alt="avatar"
       />
     </div>
@@ -35,7 +35,7 @@
       <div
         class="d-flex justify-content-between align-items-center pt-5 gap-2 mt-auto"
       >
-        <ng-container *ngIf="['my', 'joined'].includes(type)">
+        <ng-container *ngIf="['my', 'joined']?.includes(type)">
           <button
             class="btn btn-outline-danger alt third w-80-px"
             (click)="deleteOrLeaveCommunity($event, community.profileId === profileId ? 'my' : 'Leave')"
@@ -46,7 +46,7 @@
 
         <ng-container *ngIf="type === 'local'">
           <button
-            *ngIf="community.profileId === profileId"
+            *ngIf="community?.profileId === profileId"
             class="btn btn-outline-danger alt third w-80-px"
             (click)="deleteOrLeaveCommunity($event, 'my')"
           >
@@ -54,8 +54,8 @@
           </button>
           <button
             *ngIf="
-              community.profileId !== profileId &&
-              community.memberList.includes(profileId)
+              community?.profileId !== profileId &&
+              community?.memberList?.includes(profileId)
             "
             class="btn btn-outline-danger alt third w-80-px"
             (click)="deleteOrLeaveCommunity($event, 'local')"
@@ -65,7 +65,7 @@
           <button
             *ngIf="
               community.profileId !== profileId &&
-              !community?.memberList.includes(profileId)
+              !community?.memberList?.includes(profileId)
             "
             class="btn btn-outline-success alt third w-80-px"
             (click)="joinCommunity($event)"

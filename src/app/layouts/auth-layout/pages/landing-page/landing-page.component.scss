@@ -16,7 +16,7 @@
   }
 
   .custom-height {
-    background-image: url(/assets/images/landingpage/healing-hm-pg.jpg);
+    background-image: url(../../../../../assets/images/landingpage/wheels-hm-pg-2.png);
     background-size: cover;
     background-repeat: no-repeat;
     object-fit: cover;
@@ -24,6 +24,7 @@
     min-height: 400px;
 
     .banner-text {
+      display: none;
       max-width: 600px;
       width: 100%;
       background-color: #0b0d0ed4;
