@@ -26,14 +26,12 @@ import { SeoService } from 'src/app/@shared/services/seo.service';
 import { AddCommunityModalComponent } from '../communities/add-community-modal/add-community-modal.component';
 import { AddFreedomPageComponent } from '../freedom-page/add-page-modal/add-page-modal.component';
 import { Meta } from '@angular/platform-browser';
-// import { MetafrenzyService } from 'ngx-metafrenzy';
 import { isPlatformBrowser } from '@angular/common';
 import { Howl } from 'howler';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
-  // providers: [MetafrenzyService]
 })
 export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   postMessageInputValue: string = '';
@@ -80,7 +78,6 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     private router: Router,
     public tokenService: TokenStorageService,
     private seoService: SeoService,
-    // private metafrenzyService: MetafrenzyService,
     @Inject(PLATFORM_ID) private platformId: Object
   ) {
     if (isPlatformBrowser(this.platformId)) {
@@ -93,7 +90,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
         if (name) {
           this.communitySlug = name;
           this.getCommunityDetailsBySlug();
-       
+
         }
 
         this.isNavigationEnd = true;
@@ -184,7 +181,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     );
   }
 
-  ngOnDestroy(): void {}
+  ngOnDestroy(): void { }
 
   onPostFileSelect(event: any): void {
     const file = event.target?.files?.[0] || {};
@@ -220,27 +217,13 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
           this.spinner.hide();
           if (res?.Id) {
             const details = res;
-         
+
             const data = {
               title: details?.CommunityName,
               url: `${environment.webUrl}${details?.pageType}/${details?.slug}`,
               description: details.CommunityDescription,
               image: details?.coverImg,
             };
-            // this.metafrenzyService.setTitle(data.title);
-            // this.metafrenzyService.setMetaTag('og:title', data.title);
-            // this.metafrenzyService.setMetaTag('og:description', data.description);
-            // this.metafrenzyService.setMetaTag('og:url', data.url);
-            // this.metafrenzyService.setMetaTag('og:image', data.image);
-            // this.metafrenzyService.setMetaTag("og:site_name", 'Freedom.Buzz');
-            // this.metafrenzyService.setOpenGraph({
-            //   title: data.title,
-            //   //description: post.postToProfileIdName === '' ? post.profileName: post.postToProfileIdName,
-            //   description: data.description,
-            //   url: data.url,
-            //   image: data.image,
-            //   site_name: 'Freedom.Buzz'
-            // });
             this.seoService.updateSeoMetaData(data);
 
             if (details?.memberList?.length > 0) {
@@ -425,7 +408,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
         keyboard: false,
         size: 'lg',
       });
-    
+
     }
     modalRef.componentInstance.title = `Edit ${data.pageType} Details`;
     modalRef.componentInstance.cancelButtonLabel = 'Cancel';
@@ -519,10 +502,9 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
                 this.toastService.success(res.message);
                 // this.getCommunityDetailsBySlug();
                 this.router.navigate([
-                  `${
-                    this.communityDetails.pageType === 'community'
-                      ? 'car-sales'
-                      : 'car-deals'
+                  `${this.communityDetails.pageType === 'community'
+                    ? 'car-sales'
+                    : 'car-deals'
                   }`,
                 ]);
               }
