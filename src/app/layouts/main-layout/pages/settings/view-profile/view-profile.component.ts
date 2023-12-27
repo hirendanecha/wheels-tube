@@ -88,7 +88,7 @@ export class ViewProfileComponent implements OnInit, AfterViewInit, OnDestroy {
     this.spinner.show();
     this.communityList = [];
     this.communityService
-      .getCommunityByUserId(this.profileId, 'community')
+      .getCommunityByUserId(this.profileId, 'Car Sales People')
       .subscribe({
         next: (res: any) => {
           this.spinner.hide();

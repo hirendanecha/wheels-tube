@@ -1,6 +1,7 @@
 <div class="d-flex flex-column flex-lg-row w-100 gap-5 edit-profile">
   <app-img-picker
     classes="w-300-px h-300-px"
+    defaultImg="sr/assets/images/landingpage/default-profile.jpg"
     [url]="customer.ProfilePicName"
     (onFileChange)="onProfileImgChange($event)"
   />
@@ -8,7 +9,7 @@
   <div class="d-flex flex-column mb-5 w-100">
     <app-img-picker
       classes="w-100 h-300-px"
-      defaultImg="/assets/images/profile-cover.png"
+      defaultImg="sr/assets/images/landingpage/Wheels-Tube-Logo.jpg"
       [url]="customer.CoverPicName"
       (onFileChange)="onProfileCoverImgChange($event)"
     />

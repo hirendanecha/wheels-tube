@@ -287,7 +287,7 @@ export class AddFreedomPageComponent implements OnInit, AfterViewInit {
   }
 
   onCommunityNameChange(): void {
-    const slug = slugify(this.pageForm.get('CommunityName').value);
+    const slug = slugify(this.pageForm.get('Car Sales People Name').value);
     this.pageForm.get('slug').setValue(slug)
   }
 
