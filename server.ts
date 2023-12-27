@@ -88,7 +88,7 @@ export function app(): express.Express {
           description:
             'Talk face-to-face with car sales people locally or worldwide and view cars before going to the car lot Receive car data via chat or by email',
           image:
-            'https://www.wheels.tube/assets/images/default-profile.jpg',
+            'https://www.wheels.tube/assets/images/wheels-logo-min-min.png',
           site: 'https://www.wheels.tube/',
           url: 'https://www.wheels.tube' + params,
           keywords: 'WheelsTube',
@@ -155,7 +155,7 @@ export function app(): express.Express {
           const talent = {
             name: post?.title || post?.albumname || 'Healing.Tube Post',
             description: pdhtml?.textContent || 'Post content',
-            image: post?.thumbfilename || post?.metaimage || post?.imageUrl || 'https://www.wheels.tube/assets/images/default-profile.jpg',
+            image: post?.thumbfilename || post?.metaimage || post?.imageUrl || 'https://www.wheels.tube/assets/images/wheels-logo-min-min.png',
           };
           seo.title = talent.name;
           seo.description = strip_html_tags(talent.description);
