@@ -34,7 +34,7 @@ export class HealthPraatitionerCardComponent {
       if (this.community?.isApprove === 'Y') {
         this.router.navigate(['car-sales']);
       } else {
-        this.toastService.danger('This community not approve yet.');
+        this.toastService.danger('This Car Sales People not approve yet.');
       }
     }
   }
