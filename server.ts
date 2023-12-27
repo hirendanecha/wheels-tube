@@ -94,7 +94,7 @@ export function app(): express.Express {
           keywords: 'WheelsTube',
         };
         if (
-          params.indexOf('communities/') > -1 ||
+          params.indexOf('car-sales/') > -1 ||
           params.indexOf('car-deals/') > -1
         ) {
           let id = params.split('/');
