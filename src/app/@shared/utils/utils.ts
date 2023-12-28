@@ -22,7 +22,13 @@ export const getTagUsersFromAnchorTags = (anchorTags: any[]): any[] => {
   for (const key in anchorTags) {
     if (Object.prototype.hasOwnProperty.call(anchorTags, key)) {
       const tag = anchorTags[key];
-
+      const index = tag?.textContent.indexOf('@', 0);
+      if (index === 0) {
+        tags.push({
+          id: tag?.getAttribute('data-id'),
+          name: tag?.innerHTML,
+        });
+      }
       tags.push({
         id: tag?.getAttribute('data-id'),
         name: tag?.innerHTML,
