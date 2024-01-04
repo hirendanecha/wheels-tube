@@ -18,7 +18,7 @@
 
   .custom-height {
     background-image: url(../../../../../assets/images/landingpage/WheelsTubeHome.jpg);
-    background-size: cover;
+    background-size: 100% 100%;
     background-repeat: no-repeat;
     object-fit: cover;
     background-position: center;
@@ -44,8 +44,12 @@
       // }
     }
 
-    @media (max-width: 600px) {
-      min-height: 300px;
+    @media (max-width: 950px) {
+      .banner-text{
+        position: absolute;
+        bottom: 10px;
+        max-width: 365px;
+      }
       
     }
   }
