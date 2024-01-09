@@ -7,6 +7,7 @@
     font-size: min(max(22px, 2vw), 42px);
     font-weight: 600;
   }
+
   .c-fonts {
     // font-size: min(max(25px, 2vw), 44px);
     // font-size: 22px;
@@ -25,9 +26,14 @@
     height: calc(100vh);
     min-height: 400px;
 
+    @media (max-width: 750px) {
+      background-size: cover;
+      background-position: 70%;
+    }
+
     .banner-text {
       width: 100%;
-      max-width: 600px;
+      max-width: 500px;
       background-color: #0b0d0ed4;
       border-radius: 5px;
       padding: 20px 40px;
@@ -45,12 +51,12 @@
     }
 
     @media (max-width: 950px) {
-      .banner-text{
+      .banner-text {
         position: absolute;
         bottom: 10px;
         max-width: 365px;
       }
-      
+
     }
   }
 
