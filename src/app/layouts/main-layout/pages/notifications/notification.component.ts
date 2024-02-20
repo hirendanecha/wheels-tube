@@ -23,7 +23,7 @@ export class NotificationsComponent {
     private socketService: SocketService
   ) { 
     const data = {
-      title: 'WheelsTube Notification',
+      title: 'Wheels.Tube Notification',
       url: `${window.location.href}`,
       description: '',
     };

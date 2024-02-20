@@ -19,7 +19,7 @@ export class SeeFirstUserComponent implements OnInit {
     @Inject(PLATFORM_ID) private platformId: Object
   ) {
     const data = {
-      title: 'WheelsTube See First User',
+      title: 'Wheels.Tube See First User',
       url: `${window.location.href}`,
       description: '',
     };

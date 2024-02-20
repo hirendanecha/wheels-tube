@@ -55,7 +55,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
       this.type = 'success';
     }
     const data = {
-      title: 'WheelsTube login',
+      title: 'Wheels.Tube login',
       url: `${environment.webUrl}login`,
       description: 'login page',
       image: `${environment.webUrl}assets/images/landingpage/wheels-logo.min.png`,

@@ -84,7 +84,7 @@ export function app(): express.Express {
         }
         const params = req.params[0];
         var seo: any = {
-          title: 'Wheels Tube',
+          title: 'Wheels.Tube',
           description:
             'Talk face-to-face with car sales people locally or worldwide and view cars before going to the car lot Receive car data via chat or by email',
           image:

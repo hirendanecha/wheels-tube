@@ -37,7 +37,7 @@ export class CommunitiesComponent {
     }
     // this.getCommunities();
     const data = {
-      title: 'WheelsTube Car Sales',
+      title: 'Wheels.Tube Car Sales',
       url: `${window.location.href}`,
       description: '',
     };

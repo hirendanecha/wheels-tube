@@ -29,7 +29,7 @@ export class FreedomPageComponent {
 
     this.getPages();
     const data = {
-      title: 'WheelsTube Car Deals',
+      title: 'Wheels.Tube Car Deals',
       url: `${location.href}`,
       description: '',
     };
