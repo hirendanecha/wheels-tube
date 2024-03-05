@@ -60,7 +60,7 @@
 
         <div class="col-12 col-md-6 mb-3 d-flex flex-column">
           <label class="form-label"
-            >Profile Picture<span class="text-danger">*</span></label
+            >Profile Picture</label
           >
           <app-img-picker (onFileChange)="selectFiles($event)" />
         </div>
@@ -176,7 +176,7 @@
             >Mobile<span class="text-danger">*</span></label
           >
           <input
-            type="text"
+            type="number"
             class="input-area"
             name="MobileNo"
             placeholder="Enter your mobile number"
@@ -202,7 +202,6 @@
             required
             name="Country"
             class="input-area w-100"
-            (change)="changeCountry()"
             formControlName="Country"
           >
             <option [value]="defaultCountry">United states</option>
@@ -227,6 +226,7 @@
             formControlName="Zip"
             name="Zip"
             #zipCode
+            (input)="convertToUppercase($event)"
           />
           <div
             class="text-danger"
@@ -251,6 +251,12 @@
             name="State"
             formControlName="State"
           />
+          <div class="text-danger" *ngIf="
+              registerForm.get('State').hasError('required') &&
+              registerForm.get('State').touched
+            ">
+            State is required.
+          </div>
         </div>
 
         <div class="col-12 col-md-6 mb-3">
@@ -265,6 +271,12 @@
             placeholder="Enter your city"
             formControlName="City"
           />
+          <div class="text-danger" *ngIf="
+              registerForm.get('City').hasError('required') &&
+              registerForm.get('City').touched
+            ">
+            City is required.
+          </div>
         </div>
 
         <div class="col-12 col-md-6 mb-3">
@@ -279,6 +291,12 @@
             placeholder="Enter your County"
             formControlName="County"
           />
+          <div class="text-danger" *ngIf="
+              registerForm.get('County').hasError('required') &&
+              registerForm.get('County').touched
+            ">
+            County is required.
+          </div>
         </div>
       </div>
 
