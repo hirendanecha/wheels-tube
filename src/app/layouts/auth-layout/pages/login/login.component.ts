@@ -93,7 +93,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
       theme: this.theme === 'dark' ? 'light' : 'dark',
       callback: function (token) {
         localStorage.setItem('captcha-token', token);
-        this.captchaToken = token;
+        this.captchaToken=token;
         console.log(`Challenge Success ${token}`);
         if (!token) {
           this.msg = 'invalid captcha kindly try again!';

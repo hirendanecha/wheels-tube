@@ -15,9 +15,7 @@ import { SeoService } from 'src/app/@shared/services/seo.service';
 import { ToastService } from 'src/app/@shared/services/toast.service';
 import { UploadFilesService } from 'src/app/@shared/services/upload-files.service';
 import { environment } from 'src/environments/environment';
-
 declare var turnstile: any;
-
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
@@ -59,8 +57,7 @@ export class SignUpComponent implements OnInit, AfterViewInit {
     TermAndPolicy: new FormControl(false, Validators.required),
   });
   theme = '';
-  @ViewChild('captcha', { static: false }) captchaElement: ElementRef;
-
+  @ViewChild('captcha', { static: true }) captchaElement:ElementRef;
   constructor(
     private spinner: NgxSpinnerService,
     private route: ActivatedRoute,
