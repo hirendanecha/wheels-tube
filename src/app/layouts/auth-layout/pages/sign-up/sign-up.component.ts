@@ -15,7 +15,9 @@ import { SeoService } from 'src/app/@shared/services/seo.service';
 import { ToastService } from 'src/app/@shared/services/toast.service';
 import { UploadFilesService } from 'src/app/@shared/services/upload-files.service';
 import { environment } from 'src/environments/environment';
+
 declare var turnstile: any;
+
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
@@ -57,7 +59,8 @@ export class SignUpComponent implements OnInit, AfterViewInit {
     TermAndPolicy: new FormControl(false, Validators.required),
   });
   theme = '';
-  @ViewChild('captcha', { static: true }) captchaElement:ElementRef;
+  @ViewChild('captcha', { static: false }) captchaElement: ElementRef;
+
   constructor(
     private spinner: NgxSpinnerService,
     private route: ActivatedRoute,
@@ -74,6 +77,7 @@ export class SignUpComponent implements OnInit, AfterViewInit {
       image: `${environment.webUrl}assets/images/landingpage/wheels-logo.min.png`,
     };
     // this.seoService.updateSeoMetaData(data);
+    this.theme = localStorage.getItem('theme');
   }
 
   ngOnInit(): void {
@@ -81,6 +85,7 @@ export class SignUpComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
+    this.loadCloudFlareWidget();
     // fromEvent(this.zipCode.nativeElement, 'input')
     //   .pipe(debounceTime(1000))
     //   .subscribe((event) => {
@@ -89,16 +94,19 @@ export class SignUpComponent implements OnInit, AfterViewInit {
     //       // this.onZipChange(val);
     //     }
     //   });
-    this.loadCloudFlareWidget();
   }
+
+  selectFiles(event) {
+    this.profileImg = event;
+  }
+
   loadCloudFlareWidget() {
-    turnstile?.render(this.captchaElement.nativeElement,{
+    turnstile?.render(this.captchaElement.nativeElement, {
       sitekey: environment.siteKey,
       theme: this.theme === 'dark' ? 'light' : 'dark',
       callback: function (token) {
         localStorage.setItem('captcha-token', token);
-        this.captchaToken=token;
-        localStorage.setItem('captcha-token', token);
+        this.captchaToken = token;
         console.log(`Challenge Success ${token}`);
         if (!token) {
           this.msg = 'invalid captcha kindly try again!';
@@ -106,10 +114,6 @@ export class SignUpComponent implements OnInit, AfterViewInit {
         }
       },
     });
-  }
-
-  selectFiles(event) {
-    this.profileImg = event;
   }
 
   upload(file: any = {}) {

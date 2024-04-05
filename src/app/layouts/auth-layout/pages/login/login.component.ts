@@ -15,6 +15,8 @@ import { SeoService } from 'src/app/@shared/services/seo.service';
 import { SocketService } from 'src/app/@shared/services/socket.service';
 declare var turnstile: any;
 
+declare var turnstile: any;
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -60,6 +62,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
       this.msg = 'Account activated';
       this.type = 'success';
     }
+    this.theme = localStorage.getItem('theme');
     const data = {
       title: 'Wheels.Tube login',
       url: `${environment.webUrl}login`,
@@ -90,7 +93,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
       theme: this.theme === 'dark' ? 'light' : 'dark',
       callback: function (token) {
         localStorage.setItem('captcha-token', token);
-        this.captchaToken=token;
+        this.captchaToken = token;
         console.log(`Challenge Success ${token}`);
         if (!token) {
           this.msg = 'invalid captcha kindly try again!';
