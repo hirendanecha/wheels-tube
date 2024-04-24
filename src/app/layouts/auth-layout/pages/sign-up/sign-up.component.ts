@@ -57,6 +57,7 @@ export class SignUpComponent implements OnInit, AfterViewInit {
     TermAndPolicy: new FormControl(false, Validators.required),
   });
   theme = '';
+  passwordHidden: boolean = true;
   @ViewChild('captcha', { static: true }) captchaElement:ElementRef;
   constructor(
     private spinner: NgxSpinnerService,
@@ -91,6 +92,10 @@ export class SignUpComponent implements OnInit, AfterViewInit {
     //       // this.onZipChange(val);
     //     }
     //   });
+  }
+  togglePasswordVisibility(passwordInput: HTMLInputElement) {
+    passwordInput.type = passwordInput.type === 'password' ? 'text' : 'password';
+    this.passwordHidden = !this.passwordHidden;
   }
 
   selectFiles(event) {
