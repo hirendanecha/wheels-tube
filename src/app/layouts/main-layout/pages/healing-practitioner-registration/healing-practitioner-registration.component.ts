@@ -185,8 +185,9 @@ export class HealingPractitionerRegistrationComponent implements OnInit {
   }
 
   nextPageSearch() {
+    const data = this.selectedCards[0]
     if (this.selectedCards.some(card => card.name || card.zip)) {
-      const practitionerRequirements = { selectedCard: this.selectedCards };
+      const practitionerRequirements = { selectedCard: data };
       this.router.navigate(['/dealerships'], { state: { data: practitionerRequirements }});
     } else if (this.dealershipBybrand) {
       const areaValues = { selectedAreas: this.selectedAreaValues } 
