@@ -1,4 +1,4 @@
-<ng-container *ngIf="!selectPractitionerPage">
+<!-- <ng-container *ngIf="!selectPractitionerPage">
   <div class="healing-registration-container">
     <h2 class="text-center">What do you want to do?</h2>
     <div class="d-flex justify-content-center mt-10">
@@ -6,8 +6,8 @@
         <div class="card text-center">
           <div class="card-body">
             <p class="card-text">
-              Find a Naturopathic Doctor or Holistic Practitioner to have a
-              private video consultation?
+              Shop for New or Used Cars
+              <br />or<br />Car or Truck Repair
             </p>
             <button>
               <a (click)="backPreview()" class="btn btn-primary">Select</a>
@@ -39,10 +39,11 @@
       </div>
     </div>
   </div>
-</ng-container>
+</ng-container> -->
 
-<ng-container *ngIf="selectPractitionerPage">
-  <div class="d-flex justify-content-center mt-10">
+<!-- <ng-container *ngIf="selectPractitionerPage"> -->
+<ng-container>
+  <div class="d-flex justify-content-center mt-10 container w-400-px">
     <div class="d-flex flex-column">
       <div class="form-check">
         <input
@@ -54,9 +55,8 @@
           (change)="updateCheckbox('country')"
         />
         <label class="form-check-label selectCountry" for="countryCheckbox">
-          <span class="d-none d-sm-block">Find a Sales in&nbsp;</span
-          >Country:
-          <select
+          <span>Shop for New or Used Cars</span>
+          <!--<select
             id="Country"
             required
             name="Country"
@@ -84,10 +84,10 @@
             <option [value]="item.state" *ngFor="let item of allStateData">
               {{ item.state }}
             </option>
-          </select>
+          </select> -->
         </label>
       </div>
-      <div class="text-center mt-4">
+      <div class="text-center mt-2">
         <h3>OR</h3>
       </div>
       <div class="form-check">
@@ -100,63 +100,102 @@
           (change)="updateCheckbox('worldwide')"
         />
         <label class="form-check-label selectCountry" for="worldwideCheckbox">
-          Located Worldwide
+          Car or Truck Repair
         </label>
       </div>
     </div>
   </div>
-
+<ng-container *ngIf="isCountryChecked">
   <div class="healing-sub-container">
     <h2 class="text-center mt-10">
-      What emphasis are you interested in healing:
+      Shop For New Or Used Cars
     </h2>
-    <div class="d-flex justify-content-center mt-5">
+    <div class="d-flex justify-content-center mt-5" *ngIf="!dealershipBybrand">
       <div class="d-flex flex-wrap justify-content-center">
         <div *ngFor="let card of cards" class="card text-center">
           <div class="card-body">
-            <h4 class="card-title">{{ card.title }}</h4>
-            <p class="card-text">{{ card.description }}</p>
-            <button (click)="selectCard(card.id)">
+            <h5 class="card-title">{{ card.title }}</h5>
+            <div class="d-flex flex-column gap-5 my-3" *ngIf="card.id === 1 || card.id === 3">
+              <input type="text" class="input-area" placeholder="Enter Name" [(ngModel)]="card.name" [disabled]="!isSelected(card.id)">
+              <input type="text" class="input-area" placeholder="Enter Zip code" [(ngModel)]="card.zip" [disabled]="!isSelected(card.id)">
+            </div>
+            <div class="d-flex flex-column gap-5 my-3" *ngIf="card.id !== 1 && card.id !== 3 && card.id !== 4">
+              <input type="text" class="input-area" placeholder="Enter Zip code" [(ngModel)]="card.zip" [disabled]="!isSelected(card.id)">
+            </div>
+            <button (click)="selectCard(card)">
               <a
                 class="btn"
                 [ngClass]="isSelected(card.id) ? 'btn-success' : 'btn-primary'"
               >
-                {{ isSelected(card.id) ? "Selected" : "Select" }}</a
-              >
+                {{ isSelected(card.id) ? "Selected" : "Select" }}
+              </a>
             </button>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="d-flex flex-column mt-6">
-    <h4>Topics for Discussion with a Car sales people</h4>
-    <div class="container">
-      <div class="row">
-        <div *ngFor="let area of practitionerArea" class="col-md-6 col-lg-3">
-          <div class="form-check">
-            <div class="d-flex align-items-center">
-              <input
-                class="form-check-input"
-                type="checkbox"
-                [value]="area.aId"
-                id="modality{{ area.aId }}"
-                (change)="onAreaboxChange($event, area)"
-              />
-              <div class="title-container">
-                <label class="form-check-label ms-2" for="modality{{ area.aId }}" [title]="area.name">
-                  {{ area.name }}
-                </label>
+  <ng-container *ngIf="dealershipBybrand">
+    <div class="d-flex flex-column mt-6">
+      <h4>Find a car dealership by brand name</h4>
+      <div class="container">
+        <div class="row">
+          <div *ngFor="let area of practitionerArea" class="col-md-6 col-lg-3">
+            <div class="form-check">
+              <div class="d-flex align-items-center">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  [value]="area.aId"
+                  id="modality{{ area.aId }}"
+                  (change)="onAreaboxChange($event, area)"
+                />
+                <div class="title-container">
+                  <label
+                    class="form-check-label ms-2"
+                    for="modality{{ area.aId }}"
+                    [title]="area.name"
+                  >
+                    {{ area.name }}
+                  </label>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+  </ng-container>
+</ng-container>
+<ng-container *ngIf="isWorldwideChecked">
+  <div class="healing-sub-container">
+    <h2 class="text-center mt-10">Car Or Truck Repair</h2>
+    <div class="d-flex justify-content-center mt-5">
+      <div class="d-flex flex-wrap justify-content-center">
+        <div *ngFor="let card of repairCards" class="card text-center">
+          <div class="card-body">
+            <h5 class="card-title">{{ card.title }}</h5>
+            <div class="d-flex flex-column gap-5 my-3">
+              <input type="text" class="input-area" placeholder="Enter Zip code" [(ngModel)]="card.zip" [disabled]="!isSelected(card.id)">
+            </div>
+            <button (click)="selectCard(card)">
+              <a
+                class="btn"
+                [ngClass]="isSelected(card.id) ? 'btn-success' : 'btn-primary'"
+              >
+                {{ isSelected(card.id) ? "Selected" : "Select" }}
+              </a>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
+</ng-container>
+
   <div class="w-100 mt-5">
     <button
-      *ngIf="!isFromHome"
+      *ngIf="dealershipBybrand"
       (click)="backPreview()"
       class="btn btn-primary d-flex align-items-center float-start"
     >

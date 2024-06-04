@@ -22,72 +22,50 @@ export class HealingPractitionerRegistrationComponent implements OnInit {
 
   isCountryChecked: boolean = true;
   isWorldwideChecked: boolean = false;
-
+  
   selectPractitionerPage: boolean;
-
+  
   practitionerArea: any = [];
   selectedAreaValues: number[] = [];
-
+  
+  dealershipBybrand: boolean = false;
   selectedCards: any[] = [];
   cards: any[] = [
     {
-      title: 'Botanical Medicine',
+      title: 'Enter sales person name',
       id: 1,
-      description: `Plant-based supplements, tinctures, and topical applications that
-    assist the body in healing. These may include either western or
-    oriental herbal formulas with time-honored traditional healing
-    applications for various symptoms and conditions.`,
+      name: '',
+      zip: '',
     },
     {
-      title: 'Homeopathy',
+      title: 'Find a car dealership by location',
       id: 2,
-      description: `Gentle effective therapy that utilizes a minute amount of a
-    potentized substance to promote a beneficial healing response.`,
+      zip: '',
     },
     {
-      title: 'Hydrotherapy',
+      title: 'Enter dealership name',
       id: 3,
-      description: `An important healing modality in traditional naturopathic
-    medicine. Hydrotherapy utilizes the therapeutic benefits of water.
-    It includes application of cool or warm water in specialized
-    compresses or baths.`,
+      name: '',
+      zip: '',
     },
     {
-      title: 'Nutritional Counseling',
+      title: 'Find a car dealership by brand name',
       id: 4,
-      description: `Nutritional supplementation, dietary assessment, and advice in
-    making the best food choices based on your unique health history
-    and individual needs.`,
-    },
-    {
-      title: 'Lifestyle Counseling',
-      id: 5,
-      description: `Help in making new choices that are healthier for you physically,
-    emotionally, and psychologically.`,
-    },
-    {
-      title: 'Touch for Health',
-      id: 6,
-      description: ` Touch for Health is a system of balancing posture, attitude and
-    life energy to relieve stress, aches and pains, feel and function
-    better, be more effective, clarify and achieve your goals and
-    enjoy your life! Using a holistic approach we
-    rebalance the body's energies and
-    activate the body's intrinsic healing process so
-    that the body can better heal itself, creating that sense of
-    effortless effort, and being in the flow of Life.`,
-    },
-    {
-      title: `German New Medicine, Spiritual, Psychosomatic or related healing modalities`,
-      id: 7,
-      description: `Various paradigms of medicine, that recognizes the profound
-    effects of how an individual's consciousness is reflected in their
-    health and well-being. It involves awakening the body's inherent
-    self-healing properties. German New Medicine is founded of medical
-    discoveries of Dr. med. Ryke Geerd Hamer`,
-    },
+      zip: '',
+    }
   ];
-
+  repairCards: any[] = [
+    {
+      title: 'Find a car dealership service department',
+      id: 5,
+      zip: '',
+    },
+    {
+      title: 'Find a car or truck repair business',
+      id: 6,
+      zip: '',
+    }
+  ];
   isFromHome = false;
 
   constructor(
@@ -129,7 +107,7 @@ export class HealingPractitionerRegistrationComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getAllCountries();
+    // this.getAllCountries();
     this.getCategories();
   }
 
@@ -137,9 +115,9 @@ export class HealingPractitionerRegistrationComponent implements OnInit {
     if (selectedOption === 'country' && this.isWorldwideChecked) {
       this.isWorldwideChecked = false;
     } else if (selectedOption === 'worldwide' && this.isCountryChecked) {
-      this.selectedCountry = '';
-      this.selectedState = '';
-      this.allStateData = null
+      // this.selectedCountry = '';
+      // this.selectedState = '';
+      // this.allStateData = null
       this.isCountryChecked = false;
     }
   }
@@ -173,17 +151,26 @@ export class HealingPractitionerRegistrationComponent implements OnInit {
       },
     });
   }
-  isSelected(id: number): boolean {
-    return this.selectedCards.includes(id);
+
+  isSelected(cardId: number): boolean {
+    return this.selectedCards.some(card => card.id === cardId);
   }
 
-  selectCard(cardId: string): void {
-    const index = this.selectedCards.indexOf(cardId);
-    if (index === -1) {
-      this.selectedCards.push(cardId);
+  selectCard(card: any): void {
+    const cardIndex = this.selectedCards.findIndex((selectedCard) => selectedCard.id === card.id);
+    if (cardIndex === -1) {
+      [this.cards, this.repairCards].forEach(cardArr => {
+        cardArr.forEach(card => {
+          card.name = '';
+          card.zip = '';
+        });
+      });
+      this.selectedCards = [];
+      this.selectedCards.push(card);
     } else {
-      this.selectedCards = this.selectedCards.filter(id => id !== cardId);
+      this.selectedCards.splice(cardIndex, 1);
     }
+    this.dealershipBybrand = this.selectedCards.some(card => card.id === 4);
   }
 
   changeCountry() {
@@ -193,24 +180,19 @@ export class HealingPractitionerRegistrationComponent implements OnInit {
   }
 
   backPreview() {
-    this.selectPractitionerPage = !this.selectPractitionerPage;
+    this.selectedCards = [];
+    this.dealershipBybrand = !this.dealershipBybrand;
   }
 
   nextPageSearch() {
-    if (this.selectedCards.length > 0) {
-      const practitionerRequirements = {
-        selectedCard: this.selectedCards,
-        selectedCountry: this.selectedCountry,
-        selectedState: this.selectedState,
-        selectedAreas: this.selectedAreaValues
-      };
-      this.router.navigate(['/car-sales'], { state: { data: practitionerRequirements } });
-    } else if (this.isWorldwideChecked && this.selectedCards.length <= 0) {
+    if (this.selectedCards.some(card => card.name || card.zip)) {
+      const practitionerRequirements = { selectedCard: this.selectedCards };
+      this.router.navigate(['/car-sales'], { state: { data: practitionerRequirements }});
+    } else if (this.dealershipBybrand) {
       const areaValues = { selectedAreas: this.selectedAreaValues } 
-      this.router.navigate(['/car-sales'], { state: { data: areaValues } });
-    }
-    else {
-      this.toastService.danger('Please select What emphasis are you interested in healing');
+      this.router.navigate(['/car-sales'], { state: { data: areaValues }});
+    } else {
+      this.toastService.danger('Please select What are you interested in it.');
     }
   }
 
