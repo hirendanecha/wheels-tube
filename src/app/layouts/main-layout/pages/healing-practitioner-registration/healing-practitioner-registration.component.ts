@@ -187,10 +187,10 @@ export class HealingPractitionerRegistrationComponent implements OnInit {
   nextPageSearch() {
     if (this.selectedCards.some(card => card.name || card.zip)) {
       const practitionerRequirements = { selectedCard: this.selectedCards };
-      this.router.navigate(['/car-sales'], { state: { data: practitionerRequirements }});
+      this.router.navigate(['/dealerships'], { state: { data: practitionerRequirements }});
     } else if (this.dealershipBybrand) {
       const areaValues = { selectedAreas: this.selectedAreaValues } 
-      this.router.navigate(['/car-sales'], { state: { data: areaValues }});
+      this.router.navigate(['/dealerships'], { state: { data: areaValues }});
     } else {
       this.toastService.danger('Please select What are you interested in it.');
     }

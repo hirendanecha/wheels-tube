@@ -18,6 +18,7 @@ import { CustomerService } from 'src/app/@shared/services/customer.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { UploadFilesService } from 'src/app/@shared/services/upload-files.service';
 import { Router } from '@angular/router';
+import { SeoService } from 'src/app/@shared/services/seo.service';
 
 @Component({
   selector: 'app-add-community-modal',
@@ -38,7 +39,7 @@ export class AddCommunityModalComponent implements OnInit, AfterViewInit {
   selectedFile: File;
   userId = '';
   profileId = '';
-  originUrl = environment.webUrl + 'car-sales/';
+  originUrl = environment.webUrl + 'dealerships/';
   logoImg: any = {
     file: null,
     url: '',
@@ -55,6 +56,8 @@ export class AddCommunityModalComponent implements OnInit, AfterViewInit {
   selectedValues: number[] = [];
   selectedAreaValues: number[] = [];
 
+  applyAs: any[] = ['Dealership', 'Sales Consultant','Vehicle Repair'];
+
   communityForm = new FormGroup({
     profileId: new FormControl(),
     CommunityName: new FormControl(''),
@@ -70,7 +73,9 @@ export class AddCommunityModalComponent implements OnInit, AfterViewInit {
     County: new FormControl('', Validators.required),
     logoImg: new FormControl('', Validators.required),
     coverImg: new FormControl('', Validators.required),
+    applicationType: new FormControl(),
   });
+  selectedApplication: string = 'Dealership';
 
   constructor(
     public activeModal: NgbActiveModal,
@@ -79,10 +84,17 @@ export class AddCommunityModalComponent implements OnInit, AfterViewInit {
     private toastService: ToastService,
     private customerService: CustomerService,
     private uploadService: UploadFilesService,
-    private router: Router
+    private router: Router,
+    private seoService: SeoService,
   ) {
     this.userId = window.sessionStorage.user_id;
     this.profileId = localStorage.getItem('profileId');
+    const data = {
+      title: 'Wheels.Tube Dealerships',
+      url: `${window.location.href}`,
+      description: '',
+    };
+    this.seoService.updateSeoMetaData(data);
   }
 
   ngOnInit(): void {
@@ -105,6 +117,7 @@ export class AddCommunityModalComponent implements OnInit, AfterViewInit {
         County: this.data?.County,
         logoImg: this.data?.logoImg,
         coverImg: this.data?.coverImg,
+        applicationType: this.data?.applicationType,
       });
       this.communityForm.get('State').enable();
       this.communityForm.get('City').enable();
@@ -172,8 +185,9 @@ export class AddCommunityModalComponent implements OnInit, AfterViewInit {
     if (!this.data.Id) {
       this.spinner.show();
       const formData = this.communityForm.value;
-      formData['emphasis'] = this.selectedValues;
+      // formData['emphasis'] = this.selectedValues;
       formData['areas'] = this.selectedAreaValues;
+      formData['applicationType'] = this.selectedApplication;
       if (this.communityForm.valid) {
         this.communityService.createCommunity(formData).subscribe({
           next: (res: any) => {
@@ -185,7 +199,7 @@ export class AddCommunityModalComponent implements OnInit, AfterViewInit {
                 'Your Car Sales will be approved within 24 hours!'
               );
               this.activeModal.close('success');
-              this.router.navigate(['/car-sales']);
+              this.router.navigate(['/dealerships']);
             }
           },
           error: (err) => {
@@ -336,6 +350,7 @@ export class AddCommunityModalComponent implements OnInit, AfterViewInit {
       );
     }
   }
+
   onAreaboxChange(event: any, area: any): void {
     const isChecked = event.target.checked;
     if (isChecked) {
@@ -348,7 +363,7 @@ export class AddCommunityModalComponent implements OnInit, AfterViewInit {
   }
 
   clearForm(){
-    this.router.navigate(['/car-sales'])
+    this.router.navigate(['/dealerships'])
   }
 
   convertToUppercase(event: any) {
@@ -356,5 +371,9 @@ export class AddCommunityModalComponent implements OnInit, AfterViewInit {
     let inputValue = inputElement.value;
     inputValue = inputValue.replace(/\s/g, '');
     inputElement.value = inputValue.toUpperCase();
+  }
+
+  applicationChange(application: string) {
+    this.selectedApplication = application;
   }
 }

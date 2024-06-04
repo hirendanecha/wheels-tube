@@ -430,9 +430,9 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     modalRef.result.then((res) => {
       if (res === 'success') {
         if (data.pageType === 'community') {
-          this.router.navigate(['car-sales']);
+          this.router.navigate(['dealerships']);
         } else {
-          this.router.navigate(['car-deals']);
+          this.router.navigate(['repair']);
         }
       }
     });
@@ -518,8 +518,8 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
                 // this.getCommunityDetailsBySlug();
                 this.router.navigate([
                   `${this.communityDetails.pageType === 'community'
-                    ? 'car-sales'
-                    : 'car-deals'
+                    ? 'dealerships'
+                    : 'repair'
                   }`,
                 ]);
               }

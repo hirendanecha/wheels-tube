@@ -1,6 +1,6 @@
 <div class="mb-5 d-flex gap-3 justify-content-between">
   <div class="d-flex flex-column pt-3">
-    <h6 class="d-block d-xl-none text-start">Car Deals</h6>
+    <h6 class="d-block d-xl-none text-start">Car & Truck Repair Shop</h6>
 
     <ul
       ngbNav
@@ -11,8 +11,8 @@
     >
       <li ngbNavItem="my">
         <button ngbNavLink class="d-flex gap-1">
-          My
-          <div class="d-none d-xl-block">Deals</div>
+          My Repair
+          <div class="d-none d-xl-block">Shop</div>
         </button>
       </li>
 
@@ -38,7 +38,7 @@
       (click)="createCommunity()"
     >
     <fa-icon class="c-icon-color" [icon]="['fas', 'plus']" />
-      Create <div class="d-none d-sm-block">Car</div><div class="d-none d-xl-block">Deals</div>
+      Create Repair Shop
     </button>
   </div>
 </div>
@@ -58,7 +58,7 @@
     <app-inline-loader *ngIf="isPageLoader" />
 
     <ng-container *ngIf="!isPageLoader">
-      <span>No Page found</span>
+      <span>No repair shop found</span>
     </ng-container>
   </ng-container>
 </div>

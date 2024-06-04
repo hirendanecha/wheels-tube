@@ -29,10 +29,10 @@ export class CommunityCardComponent {
 
   goToCommunityDetailPage(): void {
     if (this.community.pageType === 'page') {
-      this.router.navigate(['car-deals', this.community?.slug]);
+      this.router.navigate(['repair', this.community?.slug]);
     } else {
       if (this.community?.isApprove === 'Y') {
-        this.router.navigate(['car-sales']);
+        this.router.navigate(['dealerships']);
       } else {
         this.toastService.danger('This Car Sales People not approve yet.');
       }

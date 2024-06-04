@@ -12,7 +12,7 @@
           <div class="avatar-area d-flex align-items-center gap-3">
             <!-- <img loading="lazy" class="w-48-px h-48-px rounded-3 shadow-none" data-src="{{ community?.logoImg }}"
               onerror="this.onerror=null;this.src='/assets/images/landingpage/wheels-logo-1.png';" alt="avatar" /> -->
-            <button class="btn btn-sm btn-primary">Request Call</button>
+            <!-- <button class="btn btn-sm btn-primary">Request Call</button> -->
           </div>
           <div class="d-flex mt-2">
             <fa-icon [icon]="['fas', 'globe']" class="eye-icon"></fa-icon>
@@ -24,18 +24,23 @@
     <div class="d-flex mt-2 align-items-center">
       <div class="d-flex flex-row align-items-center label">
         <fa-icon [icon]="['fas', 'circle']" class="eye-icon font-14-px"></fa-icon>
-        <span class="ms-1">Emphasis of Healing:</span>
+        <span class="ms-1">Type:</span>
       </div>
       <div class="d-flex flex-row flex-wrap gap-2">
+        <div class="smtxt category-card">
+          {{community.applicationType}}
+        </div>
+      </div>
+      <!-- <div class="d-flex flex-row flex-wrap gap-2">
         <div class="smtxt category-card" *ngFor="let item of community.emphasis">
           {{item.name}}
         </div>
-      </div>
+      </div> -->
     </div>
     <div class="d-flex mt-2 align-items-center">
       <div class="d-flex flex-row align-items-center label">
         <fa-icon [icon]="['fas', 'circle']" class="eye-icon font-14-px"></fa-icon>
-        <span class="ms-1">Areas of Healing:</span>
+        <span class="ms-1">Brands:</span>
       </div>
       <div class="d-flex flex-row flex-wrap gap-2">
         <div class="smtxt category-card" *ngFor="let item of community.areas">
