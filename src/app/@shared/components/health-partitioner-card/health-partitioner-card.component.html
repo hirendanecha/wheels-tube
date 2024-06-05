@@ -22,13 +22,13 @@
       </div>
     </div>
     <div class="d-flex mt-2 align-items-center">
-      <div class="d-flex flex-row align-items-center label">
+      <div class="flex-row align-items-center label">
         <fa-icon [icon]="['fas', 'circle']" class="eye-icon font-14-px"></fa-icon>
         <span class="ms-1">Type:</span>
-      </div>
-      <div class="d-flex flex-row flex-wrap gap-2">
-        <div class="smtxt category-card">
-          {{community.applicationType}}
+        <div class="d-flex flex-row flex-wrap gap-2 m-3">
+          <div class="smtxt category-card">
+            {{community.applicationType}}
+          </div>
         </div>
       </div>
       <!-- <div class="d-flex flex-row flex-wrap gap-2">
@@ -37,12 +37,12 @@
         </div>
       </div> -->
     </div>
-    <div class="d-flex mt-2 align-items-center">
+    <div class="mt-2 align-items-center">
       <div class="d-flex flex-row align-items-center label">
         <fa-icon [icon]="['fas', 'circle']" class="eye-icon font-14-px"></fa-icon>
         <span class="ms-1">Brands:</span>
       </div>
-      <div class="d-flex flex-row flex-wrap gap-2">
+      <div class="d-flex flex-row flex-wrap gap-2 m-3">
         <div class="smtxt category-card" *ngFor="let item of community.areas">
           {{item.name}}
         </div>

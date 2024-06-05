@@ -9,7 +9,7 @@
   h2{
     text-transform: none;
   }
-
+ 
   .card {
     width: 18rem;
     background: var(--section-1st-color);
@@ -86,4 +86,7 @@
       line-height: 22px;
     }
   }
+}
+.text-small{
+  text-transform: none;
 }
