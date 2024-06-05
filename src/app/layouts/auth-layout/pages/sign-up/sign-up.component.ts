@@ -70,11 +70,11 @@ export class SignUpComponent implements OnInit, AfterViewInit {
   ) {
     const data = {
       title: 'Wheels.Tube Registration',
-      url: `${environment.webUrl}sign-up`,
+      url: `${environment.webUrl}register`,
       description: 'Registration page',
       image: `${environment.webUrl}assets/images/landingpage/wheels-logo.min.png`,
     };
-    // this.seoService.updateSeoMetaData(data);
+    this.seoService.updateSeoMetaData(data);
     this.theme = localStorage.getItem('theme');
   }
 
