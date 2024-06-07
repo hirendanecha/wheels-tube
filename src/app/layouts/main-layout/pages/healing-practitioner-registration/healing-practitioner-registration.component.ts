@@ -4,6 +4,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { CommunityService } from 'src/app/@shared/services/community.service';
 import { CustomerService } from 'src/app/@shared/services/customer.service';
 import { SeoService } from 'src/app/@shared/services/seo.service';
+import { SharedService } from 'src/app/@shared/services/shared.service';
 import { ToastService } from 'src/app/@shared/services/toast.service';
 import { TokenStorageService } from 'src/app/@shared/services/token-storage.service';
 import { environment } from 'src/environments/environment';
@@ -84,6 +85,7 @@ export class HealingPractitionerRegistrationComponent implements OnInit {
     private tokenStorage: TokenStorageService,
     private toastService: ToastService,
     private communityService: CommunityService,
+    private sharedService:SharedService
   ) {
     const queryParams = this.route.snapshot.queryParams;
     const newParams = { ...queryParams };
@@ -114,6 +116,10 @@ export class HealingPractitionerRegistrationComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    const localUserData = JSON.parse(localStorage.getItem('userData'));
+    if (!localUserData) {
+      this.sharedService.getUserDetails();
+    }
     this.getAllCountries();
     this.getCategories();
   }
