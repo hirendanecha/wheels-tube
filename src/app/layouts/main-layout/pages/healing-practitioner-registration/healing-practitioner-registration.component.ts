@@ -37,22 +37,26 @@ export class HealingPractitionerRegistrationComponent implements OnInit {
       id: 1,
       name: '',
       zip: '',
+      type: 'sales',
     },
     {
       title: 'Find a car dealership by location',
       id: 2,
       zip: '',
+      type: 'dealership',
     },
     {
       title: 'Enter dealership name',
       id: 3,
       name: '',
       zip: '',
+      type: 'dealership',
     },
     {
       title: 'Find a car dealership by brand name',
       id: 4,
       zip: '',
+      type: 'dealership',
     }
   ];
   repairCards: any[] = [
@@ -60,11 +64,13 @@ export class HealingPractitionerRegistrationComponent implements OnInit {
       title: 'Find a car dealership service department',
       id: 5,
       zip: '',
+      type: 'repair',
     },
     {
       title: 'Find a car or truck repair business',
       id: 6,
       zip: '',
+      type: 'repair',
     }
   ];
   isFromHome = false;
@@ -108,7 +114,7 @@ export class HealingPractitionerRegistrationComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.getAllCountries();
+    this.getAllCountries();
     this.getCategories();
   }
 
@@ -187,6 +193,8 @@ export class HealingPractitionerRegistrationComponent implements OnInit {
 
   nextPageSearch() {
     const data = this.selectedCards[0]
+    data.state = this.selectedState
+    data.country = this.selectedCountry
     if (this.selectedCards.some(card => card.name || card.zip)) {
       const practitionerRequirements = { selectedCard: data };
       this.router.navigate(['/dealerships'], { state: { data: practitionerRequirements }});

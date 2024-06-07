@@ -199,13 +199,13 @@ export class AddFreedomPageComponent implements OnInit, AfterViewInit {
                 this.createAdvertizeMentLink(res.data);
                 this.createCommunityAdmin(res.data);
                 this.activeModal.close('success');
-                this.toastService.success('Health Topic created successfully');
+                this.toastService.success('Repair Shop created successfully');
                 // this.router.navigateByUrl('/home');
               }
             },
             error:
               (err) => {
-                this.toastService.danger('Please change topic name. this topic name already in use.');
+                this.toastService.danger('Please change Shop name. this Shop name already in use.');
                 this.spinner.hide();
               }
           });
@@ -228,13 +228,13 @@ export class AddFreedomPageComponent implements OnInit, AfterViewInit {
               if (!res.error) {
                 this.submitted = true;
                 // this.createCommunityAdmin(res.data);
-                this.toastService.success('Your Health Topic edit successfully!');
+                this.toastService.success('Your repair shop edit successfully!');
                 this.activeModal.close('success');
               }
             },
             error:
               (err) => {
-                this.toastService.danger('Please change topic name. this topic name already in use.');
+                this.toastService.danger('Please change Shop name. this Shop name already in use.');
                 this.spinner.hide();
               }
           });

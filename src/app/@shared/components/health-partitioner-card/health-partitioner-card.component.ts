@@ -27,6 +27,19 @@ export class HealthPraatitionerCardComponent {
     this.profileId = Number(localStorage.getItem('profileId'));
   }
 
+  getTypeName(type) {
+    switch (type) {
+      case 'dealership':
+        return 'Dealership';
+      case 'sales':
+        return 'Sales Consultant';
+      case 'repair':
+        return 'Vehicle Repair';
+      default:
+        return 'Dealership';
+    }
+  }
+
   goToCommunityDetailPage(): void {
     if (this.community.pageType === 'page') {
       this.router.navigate(['repair', this.community?.slug]);
@@ -79,8 +92,9 @@ export class HealthPraatitionerCardComponent {
 
     modalRef.componentInstance.title = `${actionType} ${this.community.pageType}`;
     modalRef.componentInstance.confirmButtonLabel = actionType;
-    modalRef.componentInstance.message = `Are you sure want to ${actionType.toLowerCase()} this ${this.community.pageType
-      }?`;
+    modalRef.componentInstance.message = `Are you sure want to ${actionType.toLowerCase()} this ${
+      this.community.pageType
+    }?`;
 
     modalRef.result.then((res) => {
       if (res === 'success') {

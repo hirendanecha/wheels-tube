@@ -178,7 +178,7 @@ export class AddCommunityModalComponent implements OnInit, AfterViewInit {
       });
     } else {
       this.onSubmit();
-    }
+      }
   }
 
   onSubmit() {
@@ -187,7 +187,10 @@ export class AddCommunityModalComponent implements OnInit, AfterViewInit {
       const formData = this.communityForm.value;
       // formData['emphasis'] = this.selectedValues;
       formData['areas'] = this.selectedAreaValues;
-      formData['applicationType'] = this.selectedApplication;
+      const applicationTypes = {
+        'Dealership': 'dealership', 'Sales Consultant': 'sales', 'Vehicle Repair': 'repair',
+      };
+      formData['applicationType'] = applicationTypes[this.selectedApplication];
       if (this.communityForm.valid) {
         this.communityService.createCommunity(formData).subscribe({
           next: (res: any) => {

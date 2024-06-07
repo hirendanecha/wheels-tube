@@ -16,36 +16,45 @@
           </div>
           <div class="d-flex mt-2">
             <fa-icon [icon]="['fas', 'globe']" class="eye-icon"></fa-icon>
-            <span class="ms-1">{{community.Country}},{{community.State}},{{community.County}},{{community.City}}</span>
+            <span class="ms-1 text-truncate">{{community.Country}},{{community.State}},{{community.County}},{{community.City}}</span>
+          </div>
+          <div class="d-flex align-items-center flex-wrap label">
+            <fa-icon [icon]="['fas', 'shop']" class="eye-icon font-14-px"></fa-icon>
+            <span class="ms-1 w-40-px">Type:</span>
+            <div class="d-flex flex-row flex-wrap gap-2 m-2">
+              <div class="smtxt category-card">
+                {{getTypeName(community.applicationType)}}
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
     <div class="d-flex mt-2 align-items-center">
-      <div class="flex-row align-items-center label">
+      <!-- <div class="flex-row align-items-center label">
         <fa-icon [icon]="['fas', 'circle']" class="eye-icon font-14-px"></fa-icon>
         <span class="ms-1">Type:</span>
         <div class="d-flex flex-row flex-wrap gap-2 m-3">
           <div class="smtxt category-card">
-            {{community.applicationType}}
+            {{getTypeName(community.applicationType)}}
           </div>
         </div>
-      </div>
+      </div> -->
       <!-- <div class="d-flex flex-row flex-wrap gap-2">
         <div class="smtxt category-card" *ngFor="let item of community.emphasis">
           {{item.name}}
         </div>
       </div> -->
     </div>
-    <div class="mt-2 align-items-center">
-      <div class="d-flex flex-row align-items-center label">
+    <div class="align-items-center">
+      <div class="d-flex flex-row align-items-baseline label">
         <fa-icon [icon]="['fas', 'circle']" class="eye-icon font-14-px"></fa-icon>
-        <span class="ms-1">Brands:</span>
-      </div>
+        <span class="ms-1 w-56-px">Brands:</span>
       <div class="d-flex flex-row flex-wrap gap-2 m-3">
         <div class="smtxt category-card" *ngFor="let item of community.areas">
           {{item.name}}
         </div>
+      </div>
       </div>
     </div>
 
