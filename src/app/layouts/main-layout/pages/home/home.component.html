@@ -183,13 +183,13 @@
       }},{{ communityDetails.City }}</span
     >
   </div>
-  <div class="d-flex mt-4 align-items-center">
+  <div class="d-flex mt-4 gap-2 align-items-center">
     <div class="d-flex flex-row align-self-baseline label">
       <fa-icon
         [icon]="['fas', 'circle']"
         class="eye-icon font-14-px"
       ></fa-icon>
-      <span class="ms-1 w-152-px">Type:</span>
+      <span class="ms-1">Type:</span>
     </div>
     <div class="d-flex flex-row flex-wrap gap-2">
       <div
@@ -200,13 +200,13 @@
       </div>
     </div>
   </div>
-  <div class="d-flex mt-4 align-items-center">
+  <div class="d-flex mt-4 gap-2 align-items-center">
     <div class="d-flex flex-row align-self-baseline label">
       <fa-icon
         [icon]="['fas', 'circle']"
         class="eye-icon font-14-px"
       ></fa-icon>
-      <span class="ms-1 w-152-px">Brands:</span>
+      <span class="ms-1">Brands:</span>
     </div>
     <div class="d-flex flex-row flex-wrap gap-2">
       <div
@@ -572,7 +572,7 @@
 </ng-container>
 
 <ng-container *ngIf="activeCommunityTab === 3">
-  <ng-container *ngIf="appointmentList.length; else noData">
+  <ng-container *ngIf="appointmentList?.length; else noData">
     <div class="card rounded shadow border-0 appointment-table">
       <div class="card-body rounded">
         <h5 class="m-0">Appointment Details</h5>
@@ -634,7 +634,7 @@
   </ng-template>
 </ng-container>
 <ng-container *ngIf="activeCommunityTab === 4">
-  <ng-container *ngIf="invoiceList.length; else noData">
+  <ng-container *ngIf="invoiceList?.length; else noData">
     <div class="card rounded shadow border-0 appointment-table">
       <div class="card-body rounded">
         <h5 class="m-0">Invoice Details</h5>

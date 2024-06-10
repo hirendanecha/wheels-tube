@@ -277,7 +277,7 @@
         </ng-template>
       </ng-container>
       <ng-container *ngIf="activeTab === 4">
-        <ng-container *ngIf="appointmentList.length; else noData">
+        <ng-container *ngIf="appointmentList?.length; else noData">
         <div class="card rounded shadow border-0 appointment-table">
           <div class="card-body rounded">
             <h5 class="m-0">Appointment Details</h5>
