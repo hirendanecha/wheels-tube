@@ -388,7 +388,11 @@ export class AddCommunityModalComponent implements OnInit, AfterViewInit {
   }
 
   clearForm(){
-    this.router.navigate(['/dealerships'])
+    if (this.data.Id) {
+      this.activeModal.close();
+    } else {
+      this.router.navigate(['/dealerships']);
+    }
   }
 
   convertToUppercase(event: any) {
