@@ -580,10 +580,10 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     const modalRef = this.modalService.open(ConfirmationModalComponent, {
       centered: true,
     });
-    modalRef.componentInstance.title = `Delete ${this.communityDetails.pageType === "community" ? "Veterinarian" : "page"}`;
+    modalRef.componentInstance.title = `Delete ${this.communityDetails.pageType === "community" ? "Dealership" : "page"}`;
     modalRef.componentInstance.confirmButtonLabel = 'Delete';
     modalRef.componentInstance.cancelButtonLabel = 'Cancel';
-    modalRef.componentInstance.message = `Are you sure want to delete this ${this.communityDetails.pageType === "community" ? "Veterinarian" : "page"}?`;
+    modalRef.componentInstance.message = `Are you sure want to delete this ${this.communityDetails.pageType === "community" ? "Dealership" : "page"}?`;
     modalRef.result.then((res) => {
       if (res === 'success') {
         this.communityService
