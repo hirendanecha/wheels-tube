@@ -741,7 +741,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       practitionerProfileId: this.communityDetails?.profileId,
       practitionerName: this.communityDetails.CommunityName,
       slug: this.communityDetails.slug,
-      topics: this.communityDetails.emphasis,
+      topics: this.communityDetails.areas,
     };
     modalRef.componentInstance.title = `Appointment Date & Time`;
     modalRef.componentInstance.confirmButtonLabel = 'Ok';
