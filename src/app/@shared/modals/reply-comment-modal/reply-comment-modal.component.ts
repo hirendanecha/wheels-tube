@@ -19,7 +19,8 @@ export class ReplyCommentModalComponent implements AfterViewInit {
   commentData: any = {
     file: null,
     url: '',
-    tags: []
+    tags: [],
+    meta: {},
   };
 
   commentMessageInputValue: string = ''
@@ -32,7 +33,7 @@ export class ReplyCommentModalComponent implements AfterViewInit {
     private changeDetectorRef: ChangeDetectorRef
   ) {
   }
-
+  
   ngAfterViewInit(): void {
     if (this.data) {
 
@@ -46,7 +47,7 @@ export class ReplyCommentModalComponent implements AfterViewInit {
       this.commentData.parentCommentId = this.data.parentCommentId
       this.commentData.postId = this.data.postId
       this.commentData.profileId = this.data.profileId
-      this.commentData.imageUrl = this.data?.imageUrl      
+      this.commentData.imageUrl = this.data?.imageUrl
       this.changeDetectorRef.detectChanges();
     }
   }
@@ -74,15 +75,13 @@ export class ReplyCommentModalComponent implements AfterViewInit {
 
   onChangeComment(): void {
     this.commentData.tags = getTagUsersFromAnchorTags(this.commentMessageTags);
-    console.log(this.commentData.tags)
     this.activeModal.close(this.commentData);
   }
 
   onTagUserInputChangeEvent(data: any): void {
-    // console.log('comments-data', data)
-    // this.commentData.comment = data?.html;
-    this.extractLargeImageFromContent(data.html);
+    this.extractLargeImageFromContent(data.html)
     this.commentMessageTags = data?.tags;
+    this.commentData.meta = data?.meta;
   }
   extractLargeImageFromContent(content: string): void {
     const contentContainer = document.createElement('div');

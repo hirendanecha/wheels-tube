@@ -93,7 +93,7 @@ export class AddCommunityModalComponent implements OnInit, AfterViewInit {
     this.profileId = localStorage.getItem('profileId');
     const data = {
       title: 'Wheels.Tube Dealerships',
-      url: `${window.location.href}`,
+      url: `${location.href}`,
       description: '',
     };
     this.seoService.updateSeoMetaData(data);
