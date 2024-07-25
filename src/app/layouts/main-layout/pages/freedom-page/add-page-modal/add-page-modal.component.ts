@@ -1,5 +1,6 @@
 import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { debounceTime, forkJoin, fromEvent } from 'rxjs';
@@ -68,7 +69,8 @@ export class AddFreedomPageComponent implements OnInit, AfterViewInit {
     private toastService: ToastService,
     private customerService: CustomerService,
     private uploadService: UploadFilesService,
-    private sharedService: SharedService
+    private sharedService: SharedService,
+    private router: Router,
   ) {
     this.userId = window.sessionStorage.user_id;
     this.profileId = localStorage.getItem('profileId');
@@ -225,6 +227,7 @@ export class AddFreedomPageComponent implements OnInit, AfterViewInit {
                 this.submitted = true;
                 // this.createCommunityAdmin(res.data);
                 this.toastService.success('Your repair shop edit successfully!');
+                this.router.navigateByUrl('/repair')
                 this.activeModal.close('success');
               }
             },
