@@ -39,7 +39,7 @@ export class ResearchDetailsComponent {
           this.groupDetails = res;
           const data = {
             title: `Wheels.Tube Research ${this.groupDetails?.PageTitle}`,
-            url: `${window.location.href}`,
+            url: `${location.href}`,
             description: this.groupDetails?.PageDescription,
             image: this.groupDetails?.CoverPicName || this.groupDetails?.ProfilePicName
           };

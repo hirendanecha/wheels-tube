@@ -99,15 +99,14 @@ export class PostCardComponent implements OnInit {
     public breakpointService: BreakpointService,
     public activeModal: NgbActiveModal
   ) {
-    this.router
     this.profileId = localStorage.getItem('profileId');
     afterNextRender(() => {
 
-      if (this.post?.id && this.post?.posttype === 'V') {
+      if (this.post?.id && this.post?.posttype === 'V' || this.post?.posttype === 'R') {
         this.playVideo(this.post?.id);
       }
       this.socketListner();
-      this.viewComments(this.post?.id);
+      // this.viewComments(this.post?.id);
       // const contentContainer = document.createElement('div');
       // contentContainer.innerHTML = this.post.postdescription;
       // const imgTag = contentContainer.querySelector('img');
@@ -122,7 +121,7 @@ export class PostCardComponent implements OnInit {
 
   ngOnInit(): void {
     // this.socketListner();
-    // this.viewComments(this.post?.id);
+    this.viewComments(this.post?.id);
   }
 
   ngAfterViewInit(): void {
@@ -248,6 +247,7 @@ export class PostCardComponent implements OnInit {
     if (comment) {
       const modalRef = this.modalService.open(ReplyCommentModalComponent, {
         centered: true,
+        backdrop: 'static',
       });
       modalRef.componentInstance.title = 'Edit Comment';
       modalRef.componentInstance.confirmButtonLabel = 'Comment';
@@ -259,12 +259,13 @@ export class PostCardComponent implements OnInit {
           this.commentData.comment = res?.comment;
           this.commentData.postId = res?.postId;
           this.commentData.profileId = res?.profileId;
+          this.commentData.meta = res?.meta;
           this.commentData['id'] = res?.id;
           if (res?.parentCommentId) {
             this.commentData.parentCommentId = res?.parentCommentId;
           }
           this.commentData['file'] = res?.file;
-          this.commentData['imageUrl'] = res?.imageUrl          .
+          this.commentData['imageUrl'] = res?.imageUrl;
           this.uploadCommentFileAndAddComment();
         }
       });
@@ -606,19 +607,19 @@ export class PostCardComponent implements OnInit {
   }
 
   onTagUserInputChangeEvent(data: any): void {
-   // this.commentMessageInputValue = data?.html;
-   this.extractLargeImageFromContent(data.html);
-   // this.commentData.comment = data?.html;
-   this.commentData.meta = data?.meta;
-   this.commentMessageTags = data?.tags;
-   // console.log(this.commentData)
+    // this.commentData.comment = data?.html;
+    this.extractLargeImageFromContent(data.html);
+    this.commentData.meta = data?.meta;
+    this.commentMessageTags = data?.tags;
+    // console.log(this.commentData)
   }
   onTagUserReplayInputChangeEvent(data: any): void {
-    this.extractLargeImageFromContent(data.html);
     // this.commentData.comment = data?.html;
+    this.extractLargeImageFromContent(data.html);
     this.commentData.meta = data?.meta;
     this.commentMessageTags = data?.tags;
   }
+
   socketListner(): void {
     this.socketService.socket?.on('likeOrDislike', (res) => {
       if (res[0]) {
@@ -741,8 +742,8 @@ export class PostCardComponent implements OnInit {
     this.commentMessageInputValue =
       this.commentMessageInputValue +
       `<img src=${emoji} width="60" height="60">`;
-
   }
+
   extractLargeImageFromContent(content: string): void {
     const contentContainer = document.createElement('div');
     contentContainer.innerHTML = content;
@@ -763,7 +764,6 @@ export class PostCardComponent implements OnInit {
           let copyImageTag = '<img\\s*src\\s*=\\s*""\\s*alt\\s*="">'
           this.commentData.comment = `<div>${content.replace(copyImage, '').replace(/\<br\>/ig, '').replace(new RegExp(copyImageTag, 'g'), '')}</div>`;
           // this.commentData.comment = content.replace(copyImage, '');
-          this.commentData.comment = content.replace(copyImage, '');
           const base64Image = copyImage
             .trim()
             .replace(/^data:image\/\w+;base64,/, '');

@@ -171,6 +171,16 @@
             />
 
             <div ngbDropdownMenu class="dropdown-menu">
+              <button ngbDropdownItem *ngIf="post.streamname">
+                <a 
+                 [href]="tubeUrl + '/video/' + post.id" target="_blank"
+                  class="droplist d-flex align-items-center gap-2"
+                  
+                >
+                  <fa-icon [icon]="['fas', 'play']" />
+                  <span>Large Player</span>
+                </a>
+              </button>
               <ng-container *ngIf="profileId != post.profileid">
                 <button
                   ngbDropdownItem
@@ -228,7 +238,8 @@
                     <span>Download</span>
                   </a>
                 </button>
-                <button ngbDropdownItem *ngIf="!isViewProfile">                  <a
+                <button ngbDropdownItem *ngIf="!isViewProfile">
+                  <a
                     class="droplist d-flex align-items-center gap-2"
                     (click)="editPost(post)"
                   >
@@ -636,9 +647,7 @@
                       [isShowEmojis]="true"
                       (onDataChange)="onTagUserReplayInputChangeEvent($event)"
                     />
-                    <div
-                      class="file-input d-flex gap-2 align-items-center"
-                    >
+                    <div class="file-input d-flex gap-2 align-items-center">
                       <div class="file-upload d-flex">
                         <label class="file">
                           <input
@@ -713,7 +722,7 @@
                           >
                             <h6 class="m-0 align-items-center">
                               {{
-                                (reply.Username || reply.FirstName)
+                                (reply?.Username || reply?.FirstName)
                                   ?.split(" ")
                                   ?.join("")
                               }}

@@ -70,7 +70,7 @@ export class ResearchListComponent {
   ) {
     const data = {
       title: 'Wheels.Tube Research',
-      url: `${window.location.href}`,
+      url: `${location.href}`,
       description: '',
     };
     this.seoService.updateSeoMetaData(data);

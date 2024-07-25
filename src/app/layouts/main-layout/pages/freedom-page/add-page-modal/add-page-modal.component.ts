@@ -96,11 +96,12 @@ export class AddFreedomPageComponent implements OnInit, AfterViewInit {
       this.pageForm.get('State').enable();
       this.pageForm.get('City').enable();
       this.pageForm.get('County').enable();
-      console.log(this.data);
     }
   }
 
   ngAfterViewInit(): void {
+    this.inputLinkValue1 = this.data?.link1 || null;
+    this.inputLinkValue2 = this.data?.link2 || null;
     fromEvent(this.zipCode.nativeElement, 'input')
       .pipe(debounceTime(1000))
       .subscribe((event) => {
@@ -197,7 +198,7 @@ export class AddFreedomPageComponent implements OnInit, AfterViewInit {
               this.spinner.hide();
               if (!res.error) {
                 this.submitted = true;
-                this.createAdvertizeMentLink(res.data);
+                this.createAdvertizeMentLink(res.data)
                 this.createCommunityAdmin(res.data);
                 this.activeModal.close('success');
                 this.toastService.success('Repair Shop created successfully');
@@ -210,12 +211,6 @@ export class AddFreedomPageComponent implements OnInit, AfterViewInit {
                 this.spinner.hide();
               }
           });
-          if (this.data.link1 || this.data.link2) {
-            this.editAdvertizeMentLink(this.data.Id);
-          } else {
-            this.createAdvertizeMentLink(this.data.Id);
-          }
-          this.sharedService.advertizementLink = [];
       } else {
         this.spinner.hide();
         this.toastService.danger('Please enter mandatory fields(*) data.');
@@ -239,16 +234,21 @@ export class AddFreedomPageComponent implements OnInit, AfterViewInit {
                 this.spinner.hide();
               }
           });
+        if (this.data.link1 || this.data.link2) {
+          this.editAdvertizeMentLink(this.data.Id);
+        } else {
+          this.createAdvertizeMentLink(this.data.Id);
+        }
+        this.sharedService.advertizementLink = [];
       }
     }
   }
-
   createAdvertizeMentLink(id) {
     if (id && (this.advertizement.link1 || this.advertizement.link2)) {
       this.advertizement.communityId = id
       this.communityService.createAdvertizeMentLink(this.advertizement).subscribe({
         next: (res => {
-          console.log(res);
+          return;
         }),
         error: (err => {
           console.log(err)
@@ -266,7 +266,7 @@ export class AddFreedomPageComponent implements OnInit, AfterViewInit {
       }
       this.communityService.editAdvertizeMentLink(data).subscribe({
         next: (res => {
-          console.log(res);
+          return;
         }),
         error: (err => {
           console.log(err)
@@ -415,13 +415,12 @@ export class AddFreedomPageComponent implements OnInit, AfterViewInit {
   //       }
   //     );
   // }
+
   onTagUserInputChangeEvent(data: any): void {
     this.advertizement.link1 = data?.meta?.url
-    console.log(data)
   }
   onTagUserInputChangeEvent1(data): void {
     this.advertizement.link2 = data?.meta?.url
-    console.log(data)
   }
 
   convertToUppercase(event: any) {
