@@ -57,6 +57,8 @@ export class AddCommunityModalComponent implements OnInit, AfterViewInit {
   practitionerEmphasis: any = [];
   selectedValues: number[] = [];
   selectedAreaValues: number[] = [];
+  removeAreaValues: number[] = [];
+  removeValues: number[] = [];
 
   applyAs: any[] = ['Dealership', 'Sales Consultant','Vehicle Repair'];
 
@@ -124,7 +126,8 @@ export class AddCommunityModalComponent implements OnInit, AfterViewInit {
       this.communityForm.get('State').enable();
       this.communityForm.get('City').enable();
       this.communityForm.get('County').enable();
-      console.log(this.data);
+      this.selectedValues = this.data.emphasis.map((emphasis: any) => emphasis.eId);
+      this.selectedAreaValues = this.data.areas.map((area: any) => area.aId);
     }
   }
 
@@ -220,28 +223,43 @@ export class AddCommunityModalComponent implements OnInit, AfterViewInit {
       }
     }
     if (this.communityForm.valid && this.data.Id) {
-      this.communityService
-        .editCommunity(this.communityForm.value, this.data.Id)
-        .subscribe({
-          next: (res: any) => {
-            this.spinner.hide();
-            if (!res.error) {
-              this.submitted = true;
-              // this.createCommunityAdmin(res.data);
-              this.toastService.success(
-                'Your Car Sales edit successfully!'
-              );
-              this.activeModal.close('success');
-            }
-          },
-          error: (err) => {
-            this.toastService.danger(
-              'Please change Car Sales. this Car Sales name already in use.'
-            );
-            this.spinner.hide();
-          },
-        });
+      this.editCommunityInterests();
     }
+  }
+
+  editCommunityInterests() {
+    const existingEmphasis = this.data.emphasis.map((emphasis) => emphasis.eId);
+    const existingAreas = this.data.areas.map((area) => area.aId);
+    const filteredEmphasis = this.selectedValues.filter((ele) =>
+      !existingEmphasis.includes(ele) ? ele : null
+    );
+    const filteredAreas = this.selectedAreaValues.filter((ele) =>
+      !existingAreas.includes(ele) ? ele : null
+    );
+
+    const formData = this.communityForm.value;
+    formData['emphasis'] = filteredEmphasis;
+    formData['areas'] = filteredAreas;
+    formData['removeEmphasisList'] = this.removeValues;
+    formData['removeAreasList'] = this.removeAreaValues;
+    this.communityService.editCommunity(formData, this.data.Id).subscribe({
+      next: (res: any) => {
+        this.spinner.hide();
+        if (!res.error) {
+          this.submitted = true;
+          this.toastService.success(
+            'Your Car Sales edit successfully!'
+          );
+          this.activeModal.close('success');
+        }
+      },
+      error: (err) => {
+        this.toastService.danger(
+          'Please change Car Sales. this Car Sales name already in use.'
+        );
+        this.spinner.hide();
+      },
+    });
   }
 
   createCommunityAdmin(id): void {
@@ -379,11 +397,17 @@ export class AddCommunityModalComponent implements OnInit, AfterViewInit {
   onAreaboxChange(event: any, area: any): void {
     const isChecked = event.target.checked;
     if (isChecked) {
-      this.selectedAreaValues.push(area.aId);
+      console.log('area',area);
+      this.selectedAreaValues.push(area);
+      this.removeAreaValues.splice(area);
     } else {
       this.selectedAreaValues = this.selectedAreaValues.filter(
-        (id) => id !== area.aId
+        (id) => id !== area
       );
+      if (!this.removeAreaValues.includes(area)) {
+        this.removeAreaValues.push(area);
+
+      }
     }
   }
 

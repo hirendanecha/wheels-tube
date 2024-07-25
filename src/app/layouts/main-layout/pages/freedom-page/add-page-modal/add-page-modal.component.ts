@@ -204,7 +204,6 @@ export class AddFreedomPageComponent implements OnInit, AfterViewInit {
                 this.createCommunityAdmin(res.data);
                 this.activeModal.close('success');
                 this.toastService.success('Repair Shop created successfully');
-                // this.router.navigateByUrl('/home');
               }
             },
             error:
@@ -227,7 +226,6 @@ export class AddFreedomPageComponent implements OnInit, AfterViewInit {
                 this.submitted = true;
                 // this.createCommunityAdmin(res.data);
                 this.toastService.success('Your repair shop edit successfully!');
-                this.router.navigateByUrl('/repair')
                 this.activeModal.close('success');
               }
             },

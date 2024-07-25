@@ -265,6 +265,7 @@
                 [value]="area.aId"
                 id="modality{{ area.aId }}"
                 (change)="onAreaboxChange($event, area)"
+                [checked]="selectedAreaValues?.includes(area.aId)"
               />
               <div class="title-container">
                 <label class="form-check-label ms-2" for="modality{{ area.aId }}" [title]="area.name">

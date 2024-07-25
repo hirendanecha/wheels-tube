@@ -509,7 +509,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
         if (data.pageType === 'community') {
           this.router.navigate(['dealerships']);
         } else {
-          this.router.navigate(['pages']);
+          this.router.navigate(['repair']);
         }
       }
     });
